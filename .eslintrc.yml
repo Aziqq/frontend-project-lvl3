@@ -11,3 +11,4 @@ extends:
 
 rules:
    no-console: 0
+   no-param-reassign: off
