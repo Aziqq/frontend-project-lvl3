@@ -93,6 +93,7 @@ export default (elements, state) => {
         handleLoadingProcessStatus(state, elements);
         break;
       case 'feeds':
+      case 'posts':
         handleFeeds(state, elements);
         break;
       case 'lang':

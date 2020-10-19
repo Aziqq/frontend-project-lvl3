@@ -8,7 +8,7 @@ import parse from './parser';
 import watch from './watcher';
 
 const baseUrlSchema = yup.string().url().required();
-const fetchingTimeout = 3000;
+const fetchingTimeout = 5000;
 
 const addProxy = (url) => {
   const proxyUrl = 'https://cors-anywhere.herokuapp.com';
