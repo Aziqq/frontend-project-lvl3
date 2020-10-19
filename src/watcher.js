@@ -1,14 +1,39 @@
 import onChange from 'on-change';
+import i18next from 'i18next';
 
 const handleForm = (state, elements) => {
-  const { form: { valid, error } } = state;
+  const { form: { valid } } = state;
   const { input, feedback } = elements;
   if (valid) {
     input.classList.remove('is-invalid');
   } else {
     input.classList.add('is-invalid');
     feedback.classList.add('text-danger');
-    feedback.textContent = error;
+    feedback.classList.remove('text-success');
+    feedback.textContent = i18next.t('exist');
+  }
+};
+
+const renderFormTranslation = (elements, lang) => {
+  const {
+    title, hint, submit, link, ru, en, feedback,
+  } = elements;
+  document.title = i18next.t('title');
+  title.textContent = i18next.t('title');
+  hint.textContent = i18next.t('hint');
+  submit.textContent = i18next.t('button');
+  link.setAttribute('placeholder', i18next.t('placeholder'));
+  if (feedback.classList.contains('text-success')) {
+    feedback.textContent = i18next.t('loaded');
+  } else if (feedback.classList.contains('text-danger')) {
+    feedback.textContent = i18next.t('exist');
+  }
+  if (lang === 'en') {
+    ru.classList.remove('active');
+    en.classList.add('active');
+  } else {
+    en.classList.remove('active');
+    ru.classList.add('active');
   }
 };
 
@@ -20,14 +45,14 @@ const handleLoadingProcessStatus = (state, elements) => {
       submit.disabled = false;
       input.removeAttribute('readonly');
       feedback.classList.add('text-danger');
-      feedback.textContent = loadingProcess.error;
+      feedback.textContent = i18next.t('exist');
       break;
     case 'idle':
       submit.disabled = false;
       input.removeAttribute('readonly');
       input.value = '';
       feedback.classList.add('text-success');
-      feedback.textContent = 'Rss loaded';
+      feedback.textContent = i18next.t('loaded');
       input.focus();
       break;
     case 'loading':
@@ -58,17 +83,21 @@ const handleFeeds = (state, elements) => {
   feedsBox.innerHTML = html;
 };
 
-export default (elements, initState) => {
-  const watchedState = onChange(initState, (path) => {
+export default (elements, state) => {
+  const watchedState = onChange(state, (path) => {
     switch (path) {
       case 'form':
-        handleForm(initState, elements);
+        handleForm(state, elements);
         break;
       case 'loadingProcess.status':
-        handleLoadingProcessStatus(initState, elements);
+        handleLoadingProcessStatus(state, elements);
         break;
       case 'feeds':
-        handleFeeds(initState, elements);
+        handleFeeds(state, elements);
+        break;
+      case 'lang':
+        i18next.changeLanguage(state.lang);
+        renderFormTranslation(elements, state.lang);
         break;
       default:
         break;

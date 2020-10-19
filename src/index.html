@@ -9,22 +9,34 @@
 
   <body class="d-flex flex-column min-vh-100">
   <main class="flex-grow-1">
+    <div class="bg-dark">
+      <div class="container-xl">
+        <div class="row pt-3">
+          <div class="col-md-10 col-lg-8 mx-auto d-flex justify-content-end text-white">
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-primary active" id="en">EN</button>
+              <button type="button" class="btn btn-outline-primary" id="ru">RU</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <section class="jumbotron jumbotron-fluid bg-dark">
       <div class="container-xl">
         <div class="row">
           <div class="col-md-10 col-lg-8 mx-auto text-white">
-            <h1 class="display-3">RSS Reader</h1>
+            <h1 class="title display-3">title</h1>
             <form action="" class="rss-form">
               <div class="form-row">
                 <div class="col">
-                  <input autofocus required name="url" aria-label="url" class="form-control form-control-lg w-100" placeholder="RSS link">
+                  <input autofocus required name="url" id="rss-link" aria-label="url" class="form-control form-control-lg w-100" placeholder="RSS link">
                 </div>
                 <div class="col-auto">
-                  <button type="submit" aria-label="add" class="btn btn-lg btn-primary px-sm-5">Add</button>
+                  <button type="submit" aria-label="add" class="btn btn-lg btn-primary px-sm-5">button</button>
                 </div>
               </div>
             </form>
-            <p class="text-muted my-1">Example: https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss</p>
+            <p class="hint text-muted my-1">Example: https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss</p>
             <div class="feedback"></div>
           </div>
         </div>
