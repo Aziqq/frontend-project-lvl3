@@ -18,6 +18,7 @@ const renderFormTranslation = (elements, lang) => {
   const {
     title, hint, submit, link, ru, en, feedback,
   } = elements;
+  i18next.changeLanguage(lang);
   document.title = i18next.t('title');
   title.textContent = i18next.t('title');
   hint.textContent = i18next.t('hint');
@@ -97,7 +98,6 @@ export default (elements, state) => {
         handleFeeds(state, elements);
         break;
       case 'lang':
-        i18next.changeLanguage(state.lang);
         renderFormTranslation(elements, state.lang);
         break;
       default:
