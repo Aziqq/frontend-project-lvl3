@@ -10,10 +10,7 @@ import watch from './watcher';
 const baseUrlSchema = yup.string().url().required();
 const fetchingTimeout = 5000;
 
-const addProxy = (url) => {
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com';
-  return `${proxyUrl}/${url}`;
-};
+const addProxy = (url) => `https://hexlet-allorigins.herokuapp.com/raw?url=${encodeURIComponent(url)}`;
 
 const validateUrl = (url, feeds) => {
   const feedUrls = feeds.map((feed) => feed.url);
